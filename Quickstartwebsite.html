@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quick Start Coffee Drink</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --black: #020617;
+      --black-soft: #0b1120;
+      --pink: #f9a8d4;      /* baby pink */
+      --pink-deep: #db2777;
+      --yellow: #facc15;    /* lightning yellow */
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: #020617;
+      --border-subtle: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #111827, var(--black));
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    header {
+      background: rgba(11, 17, 32, 0.96);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 25% 20%, var(--pink), var(--pink-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--black);
+      box-shadow: 0 0 16px rgba(249, 168, 212, 0.8);
+    }
+
+    .brand-text-main {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: -2px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 999px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    nav a:hover {
+      background: #111827;
+      color: var(--pink);
+    }
+
+    .cart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--pink);
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #111827;
+      box-shadow: 0 10px 20px rgba(219, 39, 119, 0.6);
+    }
+
+    .cart-btn span {
+      font-size: 16px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 24px auto 32px;
+      padding: 0 16px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    /* Hero */
+
+    .hero-card {
+      background: linear-gradient(135deg, var(--black-soft), #020617);
+      border-radius: 22px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      padding: 22px 22px 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+      }
+
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #111827;
+      border: 1px solid #374151;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--yellow);
+      box-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 40px);
+      margin-bottom: 8px;
+    }
+
+    h1 span {
+      color: var(--pink);
+    }
+
+    .hero-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 460px;
+    }
+
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+
+    .price-display {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--yellow);
+      text-shadow: 0 0 12px rgba(250, 204, 21, 0.8);
+      margin-bottom: 14px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .secondary-btn {
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 8px 14px;
+      background: #020617;
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .hero-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .hero-image-card {
+      background: radial-gradient(circle at top, #111827, #020617);
+      border-radius: 18px;
+      border: 1px solid #1f2937;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-image-card img {
+      width: 100%;
+      border-radius: 14px;
+      border: 2px solid var(--yellow);
+      display: block;
+    }
+
+    .hero-image-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* About */
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 850px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      padding: 16px 18px;
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .card ul {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 18px;
+    }
+
+    .card ul li {
+      margin-bottom: 4px;
+    }
+
+    .flavors-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .flavors-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .flavor-card {
+      background: #020617;
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .flavor-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .flavor-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pink);
+      margin-bottom: 2px;
+    }
+
+    .flavor-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Warnings */
+
+    .warning-block {
+      background: #111827;
+      border-radius: 18px;
+      border: 1px solid var(--yellow);
+      padding: 16px 18px;
+    }
+
+    .warning-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .warning-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 2px solid var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--yellow);
+    }
+
+    .warning-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+
+    .warning-text {
+      font-size: 12px;
+      color: #fef3c7;
+      margin-bottom: 6px;
+    }
+
+    .warning-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 750px) {
+      .warning-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .warning-column h4 {
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: var(--yellow);
+    }
+
+    .warning-column ul {
+      font-size: 12px;
+      padding-left: 18px;
+      color: #fef3c7;
+    }
+
+    .warning-column li {
+      margin-bottom: 3px;
+    }
+
+    .warning-footer {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #fecaca;
+    }
+
+    footer {
+      text-align: center;
+      padding: 14px 10px 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid #111827;
+      background: var(--black-soft);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--pink);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon">Q</div>
+      <div>
+        <div class="brand-text-main">Quick Start</div>
+        <div class="brand-text-sub">Coffee drink with focus support</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About us</a>
+      <a href="#warnings">Safety</a>
+      <button class="cart-btn" onclick="addToCart()">
+        <span>🛒</span> Add to cart • $4.25
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="section">
+      <div class="hero-card">
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            COFFEE DRINK • CREATINE BLEND • BRAIN SUPPORT
+          </div>
+
+          <h1>
+            Start the day the right way with <span>Quick Start</span> coffee.
+          </h1>
+
+          <p class="hero-text">
+            Quick Start is a coffee drink designed for functional energy, mental focus, and healthy brain support. 
+            Each can combines brewed coffee with a creatine blend and selected vitamins, intended for adults following a regular 2,000 calorie diet.
+          </p>
+
+          <div class="label">Price</div>
+          <div class="price-display">$4.25 per 12 oz can</div>
+
+          <div class="hero-buttons">
+            <button class="cart-btn" onclick="addToCart()">
+              <span>🛒</span> Add to cart • $4.25
+            </button>
+            <button class="secondary-btn" onclick="scrollToSection('warnings')">
+              Read creatine, caffeine and vitamin warnings
+            </button>
+          </div>
+
+          <p class="hero-footnote">
+            Always read the full label on the can and talk with a health professional if there are questions about ingredients, 
+            especially for people with medical conditions or those who take other supplements.
+          </p>
+        </div>
+
+        <div class="hero-image-card">
+          <img src="quickstart-vanilla.jpg" alt="Quick Start Vanilla Latte flavor coffee drink can" />
+          <div class="hero-image-caption">
+            Quick Start Vanilla Latte flavor. Also available in Chocolate flavor. Both are coffee drinks with creatine, caffeine and vitamins.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section id="about" class="section">
+      <h2>About us</h2>
+      <p class="section-sub">
+        Quick Start focuses on coffee drinks that support focus, performance and brain function while keeping the message about safety clear and simple.
+      </p>
+
+      <div class="about-grid">
+        <div class="card">
+          <h3>Coffee drink with a focus on function</h3>
+          <p>
+            Quick Start blends coffee, creatine, and selected vitamins to support mental focus and metabolism. 
+            The drink is designed to be part of an overall balanced lifestyle built on a regular 2,000 calorie diet, 
+            proper sleep, and consistent hydration.
+          </p>
+          <p>
+            The product is not meant to replace meals or water. It is a coffee drink that should be enjoyed in moderation, 
+            similar to other beverages that contain caffeine and added nutrients.
+          </p>
+          <ul>
+            <li>Supports focus and brain function with coffee and creatine</li>
+            <li>Formulated for adults on a regular calorie diet</li>
+            <li>Served cold in a sleek 12 oz can</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Flavors</h3>
+          <p>
+            Quick Start currently offers two flavors. Both are coffee based and include the same creatine and vitamin blend.
+          </p>
+
+          <div class="flavors-grid">
+            <div class="flavor-card">
+              <img src="quickstart-vanilla.jpg" alt="Quick Start Vanilla Latte flavor can" />
+              <div class="flavor-name">Vanilla Latte</div>
+              <div class="flavor-note">
+                Smooth vanilla notes with a coffee base. Light sweetness that pairs well with breakfast or an afternoon break.
+              </div>
+            </div>
+
+            <div class="flavor-card">
+              <img src="quickstart-chocolate.jpg" alt="Quick Start Chocolate flavor can" />
+              <div class="flavor-name">Chocolate</div>
+              <div class="flavor-note">
+                Rich chocolate with roasted coffee. Great for a treat while still supporting focus and performance.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WARNINGS -->
+    <section id="warnings" class="section">
+      <h2>Safety information and usage warnings</h2>
+      <p class="section-sub">
+        The information below highlights key points for adults who drink coffee beverages with creatine, caffeine and added vitamins. 
+        It is not a substitute for professional medical advice. People should consult a doctor, pharmacist or other qualified health provider for personal guidance.
+      </p>
+
+      <div class="warning-block">
+        <div class="warning-header">
+          <div class="warning-icon">!</div>
+          <div class="warning-title">General safety guidance</div>
+        </div>
+        <p class="warning-text">
+          Quick Start is intended for healthy adults following a regular 2,000 calorie diet. 
+          Recommended serving is one can per occasion and total daily intake of caffeine from all sources should stay within commonly recommended limits for adults.
+        </p>
+
+        <div class="warning-grid">
+          <div class="warning-column">
+            <h4>Creatine usage warnings</h4>
+            <ul>
+              <li>Creatine should always be paired with enough water. Not drinking enough water while using creatine can increase the risk of cramps, stomach upset or other issues.</li>
+              <li>People with kidney disease or other serious medical conditions should not use creatine products unless a doctor explicitly approves it.</li>
+              <li>Creatine products, including coffee drinks that contain creatine, are not intended for children, pregnant people or nursing people unless a health professional gives clear instructions.</li>
+              <li>Do not exceed the suggested serving. Taking more creatine than directed does not guarantee better results and may raise the risk of side effects.</li>
+              <li>Intense training, high heat and poor hydration together can stress the body. On very hot days or during heavy workouts, extra attention to water intake is important if creatine is consumed.</li>
+            </ul>
+          </div>
+
+          <div class="warning-column">
+            <h4>Caffeine usage warnings</h4>
+            <ul>
+              <li>Quick Start contains caffeine from coffee. Too much caffeine can cause jitters, rapid heartbeat, anxiety, nausea, headaches and difficulty sleeping.</li>
+              <li>Adults should consider total caffeine intake from all sources. This includes coffee, tea, soda, other coffee drinks, pre workout products and caffeine tablets.</li>
+              <li>Some people are more sensitive to caffeine and may feel strong effects even at lower amounts. For these individuals, limiting use or avoiding caffeine may be best.</li>
+              <li>Children, pregnant people and people with certain heart or sleep conditions are often advised to limit or avoid caffeine. Professional medical guidance is recommended for these groups.</li>
+              <li>Caffeine late in the afternoon or evening can interfere with sleep and recovery. Poor sleep can affect performance, mood and long term health.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="warning-grid" style="margin-top: 14px;">
+          <div class="warning-column">
+            <h4>Vitamin and nutrient considerations</h4>
+            <ul>
+              <li>Quick Start includes added vitamins that are meant to supplement a regular 2,000 calorie diet, not replace whole foods.</li>
+              <li>Using several fortified products together, such as multivitamins, protein shakes and coffee drinks with vitamins, can raise total intake of certain nutrients.</li>
+              <li>Excess intake of some vitamins over time may be harmful. People who already take supplements should check their total daily amounts and discuss them with a health professional if they are unsure.</li>
+            </ul>
+          </div>
+
+          <div class="warning-column">
+            <h4>When to avoid or stop use</h4>
+            <ul>
+              <li>Quick Start should not be used by individuals who have been told to avoid caffeine, creatine or specific vitamins by a doctor.</li>
+              <li>If unusual symptoms appear such as severe headache, chest pain, trouble breathing, strong dizziness or confusion, stop using the product and seek immediate medical help.</li>
+              <li>People who experience mild side effects such as persistent stomach upset, racing heart or difficulty sleeping should consider lowering intake or discontinuing use and talking with a health professional.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="warning-footer">
+          In any situation that feels like an emergency, such as chest pain, problems breathing, extreme confusion or signs that look like overdose, 
+          local emergency services should be contacted right away.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year">2025</span> Quick Start Coffee Drink. All rights reserved.
+    <a href="#home"> Back to top</a>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function addToCart() {
+      alert("Quick Start Coffee Drink. Price: $4.25 per can. Online ordering is not enabled in this version of the site.");
+    }
+
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  </script>
+</body>
+</html>
